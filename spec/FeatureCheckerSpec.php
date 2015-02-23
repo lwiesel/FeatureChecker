@@ -7,7 +7,7 @@ use Prophecy\Argument;
 
 class FeatureCheckerSpec extends ObjectBehavior
 {
-    protected $proper_config = ['test' => true, 'test-2' => false];
+    protected $proper_config = array('test' => true, 'test-2' => false);
 
     function it_is_initializable()
     {
@@ -29,22 +29,22 @@ class FeatureCheckerSpec extends ObjectBehavior
 
     function it_should_throw_an_exception_when_parameters_are_not_an_array_of_booleans()
     {
-        $parameters = ['string', 0, true];
+        $parameters = array('string', 0, true);
         $this->shouldThrow('\InvalidArgumentException')->during('__construct', [$parameters]);
 
-        $parameters = ['string', 'string'];
+        $parameters = array('string', 'string');
         $this->shouldThrow('\InvalidArgumentException')->during('__construct', [$parameters]);
 
-        $parameters = [0, 0, 0];
+        $parameters = array(0, 0, 0);
         $this->shouldThrow('\InvalidArgumentException')->during('__construct', [$parameters]);
     }
 
     function it_should_throw_an_exception_when_parameters_are_not_indexed_by_strings()
     {
-        $parameters = ['test' => true, 2 => false];
+        $parameters = array('test' => true, 2 => false);
         $this->shouldThrow('\InvalidArgumentException')->during('__construct', [$parameters]);
 
-        $parameters = [true, false];
+        $parameters = array(true, false);
         $this->shouldThrow('\InvalidArgumentException')->during('__construct', [$parameters]);
     }
 
