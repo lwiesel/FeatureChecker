@@ -1,0 +1,29 @@
+{
+    "name": "lwiesel/feature-checker",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.1"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Laurent Wiesel",
+            "email": "wiesel.laurent@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "LWI\\FeatureChecker\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LWI\\FeatureChecker\\Stub\\": "stub/"
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}
