@@ -3,11 +3,16 @@
 namespace spec\LWI\FeatureChecker;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class FeatureCheckerSpec extends ObjectBehavior
 {
-    protected $proper_config = array('test' => true, 'test-2' => false);
+    protected $proper_config = array(
+        'test' => true,
+        'test-2' => false,
+        'test-3' => array(
+            'test-31' => true
+        )
+    );
 
     function it_is_initializable()
     {
@@ -27,7 +32,7 @@ class FeatureCheckerSpec extends ObjectBehavior
         $this->shouldThrow('\InvalidArgumentException')->during('__construct', array($parameters));
     }
 
-    function it_should_throw_an_exception_when_parameters_are_not_an_array_of_booleans()
+    function it_should_throw_an_exception_when_parameters_are_not_an_array__or_multiarray_of_booleans()
     {
         $parameters = array('string', 0, true);
         $this->shouldThrow('\InvalidArgumentException')->during('__construct', array($parameters));
@@ -36,6 +41,9 @@ class FeatureCheckerSpec extends ObjectBehavior
         $this->shouldThrow('\InvalidArgumentException')->during('__construct', array($parameters));
 
         $parameters = array(0, 0, 0);
+        $this->shouldThrow('\InvalidArgumentException')->during('__construct', array($parameters));
+
+        $parameters = array('test' => true, array(0 => false));
         $this->shouldThrow('\InvalidArgumentException')->during('__construct', array($parameters));
     }
 
@@ -48,7 +56,7 @@ class FeatureCheckerSpec extends ObjectBehavior
         $this->shouldThrow('\InvalidArgumentException')->during('__construct', array($parameters));
     }
 
-    function it_should_not_throw_an_exception_when_parameters_string_indexed_booleans()
+    function it_should_not_throw_an_exception_when_parameters_are_string_indexed_booleans()
     {
         $this->beConstructedWith($this->proper_config);
     }
@@ -63,6 +71,8 @@ class FeatureCheckerSpec extends ObjectBehavior
     {
         $this->beConstructedWith($this->proper_config);
         $this->isFeatureEnabled('test')->shouldReturn(true);
+
+        $this->isFeatureEnabled('test-3.test-31')->shouldReturn(true);
     }
 
     function it_should_say_if_a_feature_is_disabled()

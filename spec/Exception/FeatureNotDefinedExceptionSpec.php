@@ -3,7 +3,6 @@
 namespace spec\LWI\FeatureChecker\Exception;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class FeatureNotDefinedExceptionSpec extends ObjectBehavior
 {
