@@ -1,6 +1,15 @@
 {
     "name": "lwiesel/feature-checker",
     "description": "Enable and disable functional features in php application.",
+    "keywords": ["feature-checker", "FeatureChecker"],
+    "homepage": "https://github.com/lwiesel/FeatureChecker",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Laurent Wiesel",
+            "email": "wiesel.laurent@gmail.com"
+        }
+    ],
     "require": {
         "php": ">=5.3.0"
     },
@@ -9,13 +18,6 @@
         "henrikbjorn/phpspec-code-coverage": "~1.0",
         "scrutinizer/ocular": "~1.1"
     },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Laurent Wiesel",
-            "email": "wiesel.laurent@gmail.com"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "LWI\\FeatureChecker\\": "src/"
@@ -23,7 +25,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "LWI\\FeatureChecker\\Stub\\": "stub/"
+            "LWI\\FeatureChecker\\Test\\": "tests"
         }
     },
     "config": {
