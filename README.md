@@ -43,6 +43,10 @@ $ bin/phpspec run
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
+## Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for details.
+
 ## Security
 
 If you discover any security related issues, please email [wiesel.laurent@gmail.com](wiesel.laurent@gmail.com) instead of using the issue tracker.
