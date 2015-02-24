@@ -1,6 +1,13 @@
 ---
+extensions:
+    - PhpSpec\Extension\CodeCoverageExtension
+
+code_coverage:
+    format: clover
+    output: coverage.clover
+
 suites:
-  event_suite:
-    namespace: LWI\FeatureChecker
-    psr4_prefix: LWI\FeatureChecker
+    event_suite:
+        namespace: LWI\FeatureChecker
+        psr4_prefix: LWI\FeatureChecker
 formatter.name: pretty
