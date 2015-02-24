@@ -35,7 +35,7 @@ if ($checker->isFeatureEnabled('feature-A')) {
 ## Testing
 
 ``` bash
-$ phpunit
+$ bin/phpspec run
 ```
 
 ## Contributing
