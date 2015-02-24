@@ -45,6 +45,9 @@ class FeatureCheckerSpec extends ObjectBehavior
 
         $parameters = array('test' => true, array(0 => false));
         $this->shouldThrow('\InvalidArgumentException')->during('__construct', array($parameters));
+
+        $parameters = array('test' => true, 'test-2' => 'string');
+        $this->shouldThrow('\InvalidArgumentException')->during('__construct', array($parameters));
     }
 
     function it_should_throw_an_exception_when_parameters_are_not_indexed_by_strings()
