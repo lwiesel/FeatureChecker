@@ -31,7 +31,7 @@ $features = array(
         'feature-C1' => true,
         'feature-C2' => true,
     ),
-    feature-set-D' => array(
+    'feature-set-D' => array(
         'feature-D1' => true,
         'feature-set-D2' => array(
             'feature-D2-a' => true,
