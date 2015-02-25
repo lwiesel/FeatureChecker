@@ -10,7 +10,12 @@ class FeatureCheckerSpec extends ObjectBehavior
         'test' => true,
         'test-2' => false,
         'test-3' => array(
-            'test-31' => true
+            'test-31' => true,
+            'test-32' => true,
+        ),
+        'test-4' => array(
+            'test-41' => false,
+            'test-42' => true,
         )
     );
 
@@ -70,7 +75,7 @@ class FeatureCheckerSpec extends ObjectBehavior
         $this->shouldThrow('LWI\FeatureChecker\Exception\FeatureNotDefinedException')->during('isFeatureEnabled', array('undefined-feature'));
     }
 
-    function it_should_say_if_a_feature_is_enabled()
+    function it_should_return_true_if_a_feature_is_enabled()
     {
         $this->beConstructedWith($this->proper_config);
         $this->isFeatureEnabled('test')->shouldReturn(true);
@@ -78,9 +83,21 @@ class FeatureCheckerSpec extends ObjectBehavior
         $this->isFeatureEnabled('test-3.test-31')->shouldReturn(true);
     }
 
-    function it_should_say_if_a_feature_is_disabled()
+    function it_should_return_false_if_a_feature_is_disabled()
     {
         $this->beConstructedWith($this->proper_config);
         $this->isFeatureEnabled('test-2')->shouldReturn(false);
+    }
+
+    function it_should_return_false_if_a_feature_is_disabled_in_a_set()
+    {
+        $this->beConstructedWith($this->proper_config);
+        $this->isFeatureEnabled('test-4')->shouldReturn(false);
+    }
+
+    function it_should_return_true_if_all_features_are_enabled_in_a_set()
+    {
+        $this->beConstructedWith($this->proper_config);
+        $this->isFeatureEnabled('test-3')->shouldReturn(true);
     }
 }
