@@ -35,7 +35,13 @@ class FeatureChecker
         try {
             $path = preg_split('/\./', $featureName);
 
-            return $this->findValueInMultiArray($path, $this->features);
+            $foundValue = $this->findValueInMultiArray($path, $this->features);
+
+            if (is_array($foundValue)) {
+                return $this->checkEveryChild($foundValue);
+            } else {
+                return $foundValue;
+            }
         } catch (\OutOfRangeException $e) {
             throw new FeatureNotDefinedException($featureName);
         }
@@ -99,10 +105,33 @@ class FeatureChecker
 
         $currentElement = $reference[$path[0]];
 
-        if (is_array($currentElement)) {
+        if (!isset($path[1])) {
+            return $currentElement;
+        } else if (is_array($currentElement)) {
             return $this->findValueInMultiArray(array_slice($path, 1), $currentElement);
         } else {
-            return $currentElement;
+            throw new \OutOfRangeException();
         }
+    }
+
+    /**
+     * Checks every child of the array
+     *
+     * Returns true if every child and sub-child is true
+     *
+     * @param array $features
+     * @return bool
+     */
+    protected function checkEveryChild(array $features)
+    {
+        foreach ($features as $feature) {
+            $result = is_array($feature) ? $this->checkEveryChild($feature) : $feature;
+
+            if (!$result) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

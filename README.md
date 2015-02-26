@@ -24,17 +24,42 @@ $ composer require lwiesel/feature-checker
 ## Usage
 
 ``` php
-$features = [
+$features = array(
     'feature-A' => true,
     'feature-B' => false,
-];
+    'feature-set-C' => array(
+        'feature-C1' => true,
+        'feature-C2' => true,
+    ),
+    'feature-set-D' => array(
+        'feature-D1' => true,
+        'feature-set-D2' => array(
+            'feature-D2-a' => true,
+            'feature-D2-b' => false,
+        ),
+    ),
+);
 $checker = new LWI\FeatureChecker($features);
+
 // ...
+
 if ($checker->isFeatureEnabled('feature-A')) {
     // Do something here
 }
 ```
 
+Sub-features can be checked with this notation:
+
+```php
+$checker->isFeatureEnabled('feature-set-C.feature-C1');// returns true
+```
+
+You can also test whole feature sets. A feature set is considered enabled when all sub-features -at any sub-level- is enabled.
+
+```php
+$checker->isFeatureEnabled('feature-set-C');// returns true
+$checker->isFeatureEnabled('feature-set-D');// returns false
+```
 ## Testing
 
 ``` bash
