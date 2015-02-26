@@ -73,6 +73,8 @@ class FeatureCheckerSpec extends ObjectBehavior
     {
         $this->beConstructedWith($this->proper_config);
         $this->shouldThrow('LWI\FeatureChecker\Exception\FeatureNotDefinedException')->during('isFeatureEnabled', array('undefined-feature'));
+
+        $this->shouldThrow('LWI\FeatureChecker\Exception\FeatureNotDefinedException')->during('isFeatureEnabled', array('test.undefined-feature'));
     }
 
     function it_should_return_true_if_a_feature_is_enabled()
